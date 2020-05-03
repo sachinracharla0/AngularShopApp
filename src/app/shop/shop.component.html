@@ -1,0 +1,47 @@
+<div class="container" style="margin-bottom:20px;padding-top:20px;">  
+  <div class="row">  
+    <div class="col-sm-12 btn btn-success">  
+      Shop's Information  
+    </div>  
+  </div>  
+  <div class="col-sm-12" style="margin-bottom:20px;padding-top:20px;">  
+    <div class="row">  
+      <div class="col-sm-6">  
+        <button type="button" class="btn btn-primary" data-toggle="modal" routerLink="/addshop">  
+          Add New Shop  
+        </button>  
+      </div>  
+      <div class="col-sm-6">  
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="Search">  
+      </div>  
+    </div>  
+  </div>  
+</div>  
+<div class="container" style="padding-top:20px;">  
+  <table class="table table-striped">  
+    <thead class="thead-dark">  
+      <th>Name</th>  
+      <th>Category</th>  
+      <th>Address</th>  
+      <th>Owner</th>   
+      <th>Action</th>  
+    </thead>  
+    <tbody>  
+      <tr *ngFor="let e of shop| filter: filter | paginate: { itemsPerPage: 5, currentPage: p } ; let i=index">  
+        <td>{{e.shopName}}</td>  
+        <td>{{e.shopType}}</td>  
+        <td>{{e.shopAddress['address']}}</td>  
+        <td>{{e.shopOwner}}</td> 
+        <td>  
+          <div class="btn-group">  
+            <button type="button" class="btn btn-primary mr-1" (click)="ShopEdit(e._id)">Edit</button>  
+            <button type="button" class="btn btn-danger mr-1" (click)="DeleteShop(e._id)">Delete</button>  
+          </div>  
+        </td>  
+      </tr>  
+    </tbody>  
+  </table>  
+  <ul class="pagination">  
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>  
+  </ul>  
+</div>  
